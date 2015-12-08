@@ -1,0 +1,6 @@
+SDLFLAGS=-lm `sdl-config --cflags --libs` -lSDL_ttf -lSDL_image -lfreetype
+CXXFLAGS=  $(SDLFLAGS) -W -Wall -std=c99
+
+mirage: mirage_sdl.c
+	gcc -o mirage mirage_sdl.c $(CXXFLAGS) 
+	./mirage

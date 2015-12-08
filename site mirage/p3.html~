@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style.css" />
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <title>Mirage - Site Officiel</title>
+    </head>
+    
+    <!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
+    <!--[if IE 7 ]><body class="ie7 old_ie"><![endif]-->
+    <!--[if IE 8 ]><body class="ie8"><![endif]-->
+    <!--[if IE 9 ]><body class="ie9"><![endif]-->
+    <!--[if !IE]><!--><body><!--<![endif]-->
+        <div id="bloc_page">
+            <header>
+                <div id="titre_principal">
+                    <img src="images/mirage_logo.png" alt="Logo Mirage" id="logo" />
+                    <h1>Mirage</h1>                    
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="p3.html">Avancement</a></li>
+                        <li><a href="p2.html">équipe</a></li>                       
+                    </ul>
+                </nav>
+            </header>
+            
+            <div id="banniere_image">
+                <div id="banniere_description">
+                    Donner du réves à vos creation...
+                    <a href="projet.rar" class="bouton_rouge">Télécharger <img src="images/flecheblanchedroite.png" alt="" /></a>
+                </div>
+            </div>
+            
+            <section>
+			
+			
+			<h1> 17/04/2012 </h1>
+			<p> La deuxieme soutenance s'approche a grand pas! Ils nous reste plus qu'a nous souhaiter bonne chance!
+			Deplus vous pouvez telecharger cette deuxieme soutenance sur notre site.	
+			</p>
+ 
+			<h1> 11/03/2012 </h1>
+			<p> La premiere partie de projet et terminer nous allons maintenant faire le rapport de soutenance...
+			Vous pouvez des maintenant telecharger la beta de notre projet sur notre site. 
+			</p> 
+			
+			<h1> 09/03/2012 </h1>
+			<p> L'interface... il etais temps... il s'agit de la partie du projet que nous allons coder en caml certain membre du groupe
+			ne sont pas en joie a l'idee de retoucher au caml... :'(
+			</p> 
+			<h1> 08/03/2012 </h1>
+			<p> Les controles sont enfin fini !! nous attaquons le pinceau qui permettera de faire des drags (dessiner) et de faire les 
+			figure geometrique en fonction des coordonnees de la souris.
+			</p> 
+			
+			<h1> 20/02/2012 </h1>
+			<p> les filtres... nous avons commencer les filtres pour l'instant nous avons un filtre qui permet de 
+			donner du contraste,d'augmenter les couleurs et d'augmenter la luminositer.
+			</p> 
+			
+			<h1> 05/02/2012 </h1>
+			<p> On a commencer a faire des algorithmes qui permettent de faire les
+			figures geometrique a partir de deux couples de coordonnees.
+			</p> 
+
+			
+            </section>
+            
+            <footer>
+                <div id="tweet">
+                    <h1>Notre dernier tweet</h1>
+                    <p> Premiere soutenance nous voila !!!</p>
+                    <p>le 13 mars 12h32</p>
+                </div>
+                <div id="mes_photos">
+                    <h1>Exemple de creation</h1>
+                    <p><img src="images/photo1.png" alt="Photographie" /><img src="images/photo2.png" alt="Photographie" />
+                </div>
+               <div id="mes_amis">
+                    <h1>Mos Partenaires</h1>
+                    <ul>
+                        <li><a href="http://www.siteduzero.com/">Site du Zero</a></li>
+                        <li><a href="http://twitter.com/">Twitter</a></li>
+                       
+                    </ul>
+                    <ul>
+                        <li><a href="http://www.youtube.com/">youtube</a></li>
+                        <li><a href="http://www.epita.fr/">EPITA</a></li>
+                      
+                    </ul>
+                </div> 
+            </footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,141 @@
+
+  type active_state = MOUSEFOCUS | INPUTFOCUS | APPACTIVE
+  external get_app_state : unit -> Sdlevent.active_state list
+    = "mlsdlevent_get_app_state"
+  type active_event = { gain : bool; ae_state : Sdlevent.active_state list; }
+  and switch_state = RELEASED | PRESSED
+  and keyboard_event = {
+    ke_which : int;
+    ke_state : Sdlevent.switch_state;
+    keysym : Sdlkey.t;
+    keymod : Sdlkey.mod_state;
+    keycode : char;
+  }                                                                                                                
+(* Dimensions d'une image *)
+let get_dims img =
+  ((Sdlvideo.surface_info img).Sdlvideo.w, (Sdlvideo.surface_info img).Sdlvideo.h)
+
+
+let sdl_init () =
+  begin
+    Sdl.init [`EVERYTHING];
+    Sdlevent.enable_events Sdlevent.all_events_mask;
+  end
+
+let rec wait_mouse () =
+  let e = Sdlevent.wait_event () in
+    match e with
+	Sdlevent.MOUSEBUTTONDOWN _-> ()
+      | _ -> wait_mouse ()
+
+(*let rec button () =
+  let e =Sdlevent.keyboard_event () in
+    match e with
+        Sdlevent.KEYDOWN  KEY_SPACE -> ()
+      | _ -> button ()*)
+
+
+(*SDLK_ESCAPE*)
+
+let rec wait_key () =
+  let e = Sdlevent.wait_event () in
+    match e with
+	
+	  Sdlevent.KEYDOWN _ -> ()
+      | _ -> wait_key ()
+
+let show img dst =
+  let d = Sdlvideo.display_format img in
+    Sdlvideo.blit_surface d dst ();
+    Sdlvideo.flip dst
+
+
+let compare (a, b) = if (a = b) then
+true
+  else false ;;
+let limcoul (r,g,b)= 
+  let lc x = if x > 255 then 255 else ( if x < 0 then 0 else x ) in
+(lc r,lc g,lc b);;  
+
+let plusfonce (r,g,b) = ((r/2)+(r/4),(g/2)+(g/4),(b/2)+(b/4))
+let plusclaire (r,g,b) = limcoul(r+(r/4),g+(g/4),b+(b/4))
+let decontraste (r,g,b) = ((r/2)+((g+b)/4),(g/2)+((r+b)/4),(b/2)+((r+g)/4))
+let inverse (r,g,b) = ((255-r), (255-g), (255-b))
+let contraste (r,g,b) = limcoul( ((r*2)-((g+b)/4)), ((g*2)-((r+b)/4)), ((b*2)-((r+g)/4)) )
+let col (x,y)= (255,0,0)
+
+let rec change img1 img2 n=
+  let (h, w) = get_dims img1
+  in
+    for j = 0 to (w - 2) do
+      for i = 0 to (h - 2) do
+	match n with
+	  |1->  Sdlvideo.put_pixel_color img2 i j (inverse(Sdlvideo.get_pixel_color
+                                       img1 (i) (j) ))
+
+	  |2->  Sdlvideo.put_pixel_color img2 i j (decontraste(Sdlvideo.get_pixel_color
+                                       img1 (i) (j) ))
+ 
+	  |3-> Sdlvideo.put_pixel_color img2 i j (contraste(Sdlvideo.get_pixel_color                  
+                             img1 (i) (j) ))
+
+	  |4-> Sdlvideo.put_pixel_color img2 i j (plusclaire(Sdlvideo.get_pixel_color
+                             img1 (i) (j) ))
+	  
+	  |5-> Sdlvideo.put_pixel_color img2 i j (plusfonce(Sdlvideo.get_pixel_color
+                             img1 (i) (j) ))
+
+	  |_->()
+      done
+    done 
+
+
+(*let rec select img2 j i =
+  let (w, h) = get_dims img2
+  in
+  if (j<(w-1)) then ( 
+    if (Sdlvideo.get_pixel_color img2 j i)==(color img2 i j) then Sdlvideo.put_pixel_color img2 j i (255,0,0);
+     select img2 (j+1) i)
+  else 
+    (if i<(h-1) then
+	select img2 1 (i+1))*)
+  
+
+
+
+let rec key n img img2 display=
+  let e = Sdlevent.wait_event () in
+    match e with
+      | Sdlevent.MOUSEBUTTONDOWN _ -> (change img img2 n);(show img2 display);(key n img2 img2 display)
+      |  Sdlevent.KEYDOWN _-> ()
+      | _ -> (key n img img2 display)
+
+
+
+
+let main ()  =
+begin
+  let img = Sdlloader.load_image Sys.argv.(1) in
+  let n = int_of_string Sys.argv.(2) in
+  let (w,h) = get_dims img in
+  let img2 = img in
+  (*let img2 = Sdlvideo.create_RGB_surface_format img [] w h in
+fonce img img2 n; *)
+
+  let display = Sdlvideo.set_video_mode w h [`DOUBLEBUF] in
+            
+      
+  show (img2) display;
+  (*change img img2 n;*)
+   key n img img2 display;
+
+    (*col(Sdlevent.MouseButtonEvent.motion.X,Sdlevent.MouseButtonEvent.motion.Y);*)
+      (*select img2 1 1;*)
+   (*show img2 display;*)
+  
+
+
+      
+end
+
+let _ = main ()
